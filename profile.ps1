@@ -1,6 +1,5 @@
 Write-Host $MyInvocation.MyCommand.Definition
 $here = (Split-Path -parent $MyInvocation.MyCommand.Definition)
-$profilePath = Split-Path $profile -parent
 #region One-Liner Functions
 function FQDN { (Get-Content Env:\COMPUTERNAME) + '.' + (Get-Content Env:\USERDNSDOMAIN); }
 function reloadprofile { & $profile }
@@ -9,7 +8,7 @@ function set-verbose ([bool]$onoff) { if ( $onoff ) { $PSDefaultParameterValues.
 #endregion
 
 #region Aliases
-Set-Alias -Name "git" -Value "hub" -Description "hub recommended replacement for git" -Confirm $false
+Set-Alias -Name "git" -Value "hub" -Description "hub recommended replacement for git"
 #endregion
 
 #region Default Parameters
