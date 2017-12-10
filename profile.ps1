@@ -8,6 +8,10 @@ function which ($cmd) { get-command $cmd | Select-Object path }
 function set-verbose ([bool]$onoff) { if ( $onoff ) { $PSDefaultParameterValues.Add("*:Verbose", $True) } else { $PSDefaultParameterValues.Remove("*:Verbose", $True) } }
 #endregion
 
+#region Aliases
+Set-Alias -Name "git" -Value "hub" -Description "hub recommended replacement for git" -Confirm $false
+#endregion
+
 #region Default Parameters
 # set default parameters on various commands. See 'Help about_Parameters_Default_Values' for more info
 $PSDefaultParameterValues.Add('Format-Table:Force', $True)
