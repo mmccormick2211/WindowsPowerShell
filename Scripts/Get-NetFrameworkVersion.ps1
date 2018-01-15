@@ -25,19 +25,16 @@ function Get-NetFrameworkVersion {
             Default {$NetFrameworkVersion = "$Release = Net Framework 4.5 or later is not installed."}
         }
         $Object = [PSCustomObject]@{
-            Computername        = $env:COMPUTERNAME
+            Computername        = $Computer
             NETFrameworkVersion = $NetFrameworkVersion
         }
         $Object
     }
-    if ($Computer = "localhost") {
-        . $ScriptBlockToRun
-    }
-    else {
-        $RemoteSession = New-PSSession $Computer
-        Invoke-Command -Session $RemoteSession -ScriptBlock $ScriptBlockToRun
-    }
+
+    Write-Debug -Message "Testing $Computer..." -Debug
+    if ($Computer = "localhost") { $Computer = $env:COMPUTERNAME.ToString; . $ScriptBlockToRun }
+    else { Invoke-Command -Session (New-PSSession $Computer) -ScriptBlock $ScriptBlockToRun }
 }
 
-
-# Get-iLPNetFrameworkVersion  #self-reference for testing
+Get-NetFrameworkVersion 127.0.0.1
+Get-NetFrameworkVersion

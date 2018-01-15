@@ -35,6 +35,5 @@ Function Add-VMware {
         Function global:Find-OutdatedVMTools {
             Get-VM | Where-Object {$_.ExtensionData.Guest.ToolsStatus -eq "toolsOld"} | Sort-Object name |Format-Table -AutoSize -Property name, powerstate
         }
-        Update-PSTitleBar 'VMware'
     }
 }
